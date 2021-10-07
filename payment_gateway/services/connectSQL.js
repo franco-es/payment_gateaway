@@ -1,11 +1,11 @@
-var mysql = require("mysql");
+const Sequelize = require("sequelize");
 
-var connection = mysql.createPool({
-  host: "127.0.0.1",
-  port: "3308",
-  user: "root",
-  password: "admin",
-  database: "payment_pasarella",
+const sequelize = new Sequelize("payment_pasarella", "root", "admin", {
+  host: "localhost",
+  dialect: "mysql",
+  port: 3308,
+  logging: false,
 });
+sequelize.sync({ alter: true });
 
-module.exports = connection;
+module.exports = sequelize;

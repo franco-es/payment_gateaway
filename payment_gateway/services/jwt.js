@@ -2,6 +2,7 @@ const jwt = require("jwt-simple");
 const moment = require("moment");
 
 exports.createToken = (user) => {
+  console.log(user);
   var payload = {
     sub: user.ID_USERS,
     name: user.USER_NAME,
@@ -11,5 +12,5 @@ exports.createToken = (user) => {
     iat: moment().unix(),
     exp: moment().add(30, "days").unix,
   };
-  return jwt.encode(payload, "esta_es_la_clave_secreta_1234_0987");
+  return jwt.encode(payload, "coco_nuts_gateway_382910_ioepwq");
 };
