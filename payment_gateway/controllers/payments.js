@@ -1,30 +1,27 @@
-//LIBRARY IMPORTS
-const payments = require("../models/payments");
-const user_payment_influent = require("../models/user_payment_influent");
-const wallet_payment = require("../models/wallet_payment");
-const Wallet = require("../models/wallet");
+const service = require("../services/payments");
 
 const Controller = {
   save: async (req, res) => {
     const { influentId, paymentAmaunt } = req.body;
     const idUser = req.user.sub;
-    // console.log(idUser);
-    const preInfluentWallet = await Wallet.findByPk(influentId);
-    const influentWalletAmaunt =
-      parseInt(preInfluentWallet.WALLET_AMAUNT) + parseInt(paymentAmaunt);
-    const wallet = await Wallet.update(
-      {
-        WALLET_AMAUNT: influentWalletAmaunt,
-      },
-      {
-        where: {
-          USER_ID: influentId,
-        },
-      }
+    const wallet = await service.get(influentId);
+    let walletJson = wallet.toJSON();
+    let payment = await service.newPayment(paymentAmaunt);
+    let paymentJson = payment.toJSON();
+    let upi = await service.newPaymentInfluent(
+      idUser,
+      influentId,
+      paymentJson.ID_PAYMENTS
     );
-    res.status(200).send({
-      wallet: wallet,
-    });
+    let upiJson = upi.toJSON();
+    let walletPayment = await service.newWalletPayment(
+      walletJson.ID_WALLET,
+      upiJson.ID_USER_PAYMENT_INFLUENT
+    );
+    let walletPaymentJson = walletPayment.toJSON();
+    console.log(walletPaymentJson);
+    await service.update(influentId, walletJson.WALLET_AMAUNT, paymentAmaunt);
+    res.status(200).send("success");
   },
   // update: async (req, res) => {
   //   const { idCategory, name } = req.body;

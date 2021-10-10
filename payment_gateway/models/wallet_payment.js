@@ -1,9 +1,12 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const Wallet = require("./wallet");
+const user_payment_influent = require("./user_payment_influent");
 const sequelize = require("../services/connectSQL");
 const walletPayment = sequelize.define(
   "wallet_payment",
   {
     ID_WALLET_PAYMENT: {
+      autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
@@ -49,6 +52,9 @@ const walletPayment = sequelize.define(
     ],
   }
 );
-
-
+walletPayment.belongsTo(Wallet, { as: "WALLET", foreignKey: "WALLET_ID" });
+walletPayment.belongsTo(user_payment_influent, {
+  as: "PAYMENT",
+  foreignKey: "PAYMENT_ID",
+});
 module.exports = walletPayment;

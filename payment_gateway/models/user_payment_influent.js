@@ -4,6 +4,7 @@ const userPaymentInfluent = sequelize.define(
   "user_payment_influent",
   {
     ID_USER_PAYMENT_INFLUENT: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
