@@ -57,9 +57,4 @@ const Users = sequelize.define(
   }
 );
 
-Users.hasMany(user_categorie, {
-  as: "user_categories",
-  foreignKey: "USER_ID",
-});
-
 module.exports = Users;

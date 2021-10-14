@@ -4,6 +4,9 @@ const Controller = {
   save: async (req, res) => {
     const { influentId, paymentAmaunt } = req.body;
     const idUser = req.user.sub;
+    //pago hacia la cuenta real.
+
+    //pagos ficticios
     const wallet = await service.get(influentId);
     let walletJson = wallet.toJSON();
     let payment = await service.newPayment(paymentAmaunt);
@@ -20,7 +23,15 @@ const Controller = {
     );
     let walletPaymentJson = walletPayment.toJSON();
     console.log(walletPaymentJson);
-    await service.update(influentId, walletJson.WALLET_AMAUNT, paymentAmaunt);
+    //retiro de comision
+    /**
+     * si el usuario tiene bonificado verdad
+     * NO cobra comision
+     * y si no, se cobra comision.
+     */
+    let comision = parseInt(paymentAmaunt) - 0.99;
+    //agregar a la billetera
+    await service.update(influentId, walletJson.WALLET_AMAUNT, comision);
     res.status(200).send("success");
   },
   // update: async (req, res) => {
