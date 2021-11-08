@@ -1,9 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import { Form, Button } from "react-bootstrap";
 
 const Profile = () => {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [pix, setPix] = useState("");
+  const [challeng, setChalleng] = useState("")
+  const [chalengeDesc, setChalengeDesc] = useState("")
+  const [chalengeCuantity, setChalengeCuantity] = useState("")
+
   return (
     <div className="container rounded bg-white mt-5 mb-5">
       <div className="row">
@@ -14,8 +24,8 @@ const Profile = () => {
               width="150px"
               src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
             />
-            <span className="font-weight-bold">Nombre Usuario</span>
-            <span className="text-black-50">edogaru@mail.com.my</span>
+            <span className="font-weight-bold">{name}</span>
+            <span className="text-black-50">{email}</span>
             <span> </span>
           </div>
         </div>
@@ -123,12 +133,8 @@ const Profile = () => {
             </div>
             <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Cuenta Bancaria</Form.Label>
+                <Form.Label>Pix</Form.Label>
                 <Form.Control type="email" placeholder="Nro-Cuenta" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Alias</Form.Label>
-                <Form.Control type="email" placeholder="Alias" />
               </Form.Group>
               <Button variant="primary" type="submit">
                 Guardar

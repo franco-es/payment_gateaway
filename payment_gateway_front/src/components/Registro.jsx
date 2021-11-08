@@ -1,64 +1,107 @@
-import React from "react";
+import React, {useCallback, useState, useEffect} from "react";
+import register from "../services/register";
 
 const Registro = () => {
+  const [email, setEmail] = useState("");
+  const [pass, setPassword] = useState("");
+  const [name, SetName] = useState("");
+  const [username, SetUsername] = useState("");
+  const [lastName, SetLastName] = useState("");
+  const [telefono, SetTelefono] = useState("");
+  const [DNI, SetDNI] = useState("");
+  const [error, setError] = useState("");
+
+  const cleanForm = () => {
+    
+  };
+
+  const RegisterEmail = async (e) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      // console.group("ingrese email");
+      setError("el email es OBLIGATORIO");
+      return;
+    }
+    if (!pass.trim()) {
+      // console.group("ingrese password");
+      setError("La password es OBLIGATORIA");
+      return;
+    }
+    if (pass.length < 6) {
+      // console.log("password menor de 6 caracteres.");
+      setError("password menor de 6 caracteres.");
+      return;
+    }
+    if (!telefono.trim()) {
+      // console.log("password menor de 6 caracteres.");
+      setError("El Numero de telefono es OBLIGATORIO.");
+      return;
+    }
+    if (!name.trim()) {
+      // console.log("password menor de 6 caracteres.");
+      setError("El nombre es OBLIGATORIO.");
+      return;
+    }
+    console.log("pasando todas las validaciones");
+    signUp();
+  };
+
+  const signUp = useCallback(async () => {
+    const res = await register(email, pass, name, telefono, lastName, DNI, 2, username );
+    console.log(res);
+    cleanForm();
+  }, [email, pass, name, telefono, lastName, DNI, username]);
+
   return (
     <div>
-      <div className="box">
-        <div className="card">
-          <div className="card-title">
-            <h1>Register</h1>
-          </div>
-          <div className="card-body width18rem align-content-center">
-            <form>
-              <div class="form-group">
-                <label for="email">Email address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  aria-describedby="emailHelp"
-                />
-                <small id="emailHelp" className="form-text text-muted">
-                  We'll never share your email with anyone else.
-                </small>
-              </div>
-              <div className="form-group">
-                <label for="password">Password</label>
-                <input type="password" className="form-control" id="password" />
-              </div>
-              <div className="form-group">
-                <label for="name">Name</label>
-                <input type="text" className="form-control" id="name" />
-              </div>
-              <div className="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" className="form-control" id="lastName" />
-              </div>
-              <div className="form-group">
-                <label for="dni">DNI</label>
-                <input type="text" className="form-control" id="dni" />
-              </div>
-              <div className="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" className="form-control" id="phone" />
-              </div>
-              <div className="form-group form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label className="form-check-label" for="exampleCheck1">
-                  I agree with terms and conditions
-                </label>
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Register
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
+      <form onSubmit={RegisterEmail} className="mb-3">
+        {error && <div className="alert alert-danger">{error}</div>}
+        <input
+          type="text"
+          className="form-control mb-2"
+          placeholder="Ingrese su Username"
+          onChange={(e) => SetUsername(e.target.value)}
+        />
+        <input
+          type="text"
+          className="form-control mb-2"
+          placeholder="Ingrese su Nombre"
+          onChange={(e) => SetName(e.target.value)}
+        />
+        <input
+          type="text"
+          className="form-control mb-2"
+          placeholder="Ingrese su Apellido"
+          onChange={(e) => SetLastName(e.target.value)}
+        />
+        <input
+          type="email"
+          className="form-control mb-2"
+          placeholder="Ingrese un email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          className="form-control mb-2"
+          placeholder="Ingrese un password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="number"
+          className="form-control mb-2"
+          placeholder="Ingrese su DNI"
+          onChange={(e) => SetDNI(e.target.value)}
+        />
+        <input
+          type="number"
+          className="form-control mb-2"
+          placeholder="Ingrese un telefono"
+          onChange={(e) => SetTelefono(e.target.value)}
+        />
+        <button type="submit" className="btn btn-dark btn-lg btn-block">
+          Registrate
+        </button>
+      </form>
     </div>
   );
 };

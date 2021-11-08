@@ -33,6 +33,9 @@ function App() {
               <Route path="/profile" exact>
                 <Profile />
               </Route>
+              <Route path="/public" exact>
+                <PublicProfile />
+              </Route>
             </>
           ) : (
             <p>Bienvenido</p>

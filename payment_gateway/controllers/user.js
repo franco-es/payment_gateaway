@@ -13,28 +13,20 @@ const saltRouds = 10;
 
 const Controller = {
   save: async (req, res) => {
-    const { name, lastName, email, password, dni, phone, category } = req.body;
-    const isUser = await users.findAll({
-      where: {
-        USER_EMAIL: email,
-      },
-    });
-    console.log(isUser);
-    if (isUser.length > 0) {
-      res.status(400).send({
-        message: "there is a user with that email already",
-        user: isUser[0].USER_EMAIL,
-      });
-    } else {
-      const passwordHashed = bcrypt.hashSync(password, saltRouds);
-      var params = {
-        USER_NAME: name,
-        USER_LASTNAME: lastName,
-        USER_EMAIL: email,
-        USER_PASSWORD: passwordHashed,
-        USER_PHONE: phone,
-        USER_DNI: dni,
-      };
+    const { name, lastName, email, password, dni, phone, category, username } =
+      req.body;
+
+    const passwordHashed = bcrypt.hashSync(password, saltRouds);
+    var params = {
+      USER_NAME: name,
+      USER_LASTNAME: lastName,
+      USER_EMAIL: email,
+      USER_PASSWORD: passwordHashed,
+      USER_USERNAME: username,
+      USER_PHONE: phone,
+      USER_DNI: dni,
+    };
+    try {
       const userCreated = await users.create(params);
       const user = userCreated.toJSON();
       // console.log(user.ID_USERS);
@@ -54,6 +46,13 @@ const Controller = {
         wallet: walletCreated,
         categoria: categoryCreated.toJSON(),
       });
+    } catch (error) {
+      switch(error.errors[0].message){
+        case "users.USER_EMAIL must be unique":
+          res.send("el email debe ser unico");
+        case "users.USER_USERNAME must be unique":
+          res.send("el username debe ser unico");
+      }
     }
   },
 

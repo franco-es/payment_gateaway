@@ -21,10 +21,16 @@ const Users = sequelize.define(
     USER_EMAIL: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     USER_PASSWORD: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    USER_USERNAME: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     },
     USER_PHONE: {
       type: DataTypes.STRING,
@@ -37,9 +43,11 @@ const Users = sequelize.define(
     },
     USER_CREATED_AT: {
       type: DataTypes.DATEONLY,
+      defaultValue: Sequelize.NOW
     },
     USER_UPDATED_AT: {
       type: DataTypes.DATEONLY,
+      defaultValue: Sequelize.NOW
     },
   },
   {
