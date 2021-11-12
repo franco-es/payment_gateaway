@@ -8,6 +8,7 @@ const users = require("../models/users");
 const categories = require("../models/categories");
 const userCategory = require("../models/user_categorie");
 const wallet = require("../models/wallet");
+const { use } = require("../routes/users");
 
 const saltRouds = 10;
 
@@ -47,12 +48,13 @@ const Controller = {
         categoria: categoryCreated.toJSON(),
       });
     } catch (error) {
-      switch(error.errors[0].message){
+      switch (error.errors[0].message) {
         case "users.USER_EMAIL must be unique":
           res.send("el email debe ser unico");
         case "users.USER_USERNAME must be unique":
           res.send("el username debe ser unico");
       }
+      res.send(error.errors[0]);
     }
   },
 
@@ -87,6 +89,39 @@ const Controller = {
     } else {
       res.status(401).send({
         message: "Invalid username or password",
+      });
+    }
+  },
+
+  getUser: async (req, res) => {
+    const { id } = req.body;
+    console.log(id);
+    try {
+      if (id === null || "") {
+        return res.status(400).send({
+          message: "not Id provided",
+        });
+      } else {
+        let user = await users.findByPk(id);
+        let userJSON = user.toJSON();
+        delete userJSON.USER_PASSWORD;
+        delete userJSON.USER_NAME;
+        delete userJSON.USER_LASTNAME;
+        delete userJSON.USER_EMAIL;
+        delete userJSON.USER_PHONE;
+        delete userJSON.USER_DNI;
+        delete userJSON.USER_DELETED;
+        delete userJSON.USER_CREATED_AT;
+        delete userJSON.USER_UPDATED_AT;
+
+        res.status(200).send({
+          message: "user",
+          user: userJSON,
+        });
+      }
+    } catch (error) {
+      res.status(400).send({
+        message: "Cannot read properties of null, please provide an Id VALID",
       });
     }
   },

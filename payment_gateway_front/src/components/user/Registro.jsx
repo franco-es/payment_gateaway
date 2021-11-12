@@ -1,5 +1,5 @@
-import React, {useCallback, useState, useEffect} from "react";
-import register from "../services/register";
+import React, {useCallback, useState} from "react";
+import register from "../../services/register";
 
 const Registro = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +12,13 @@ const Registro = () => {
   const [error, setError] = useState("");
 
   const cleanForm = () => {
-    
+    setEmail("");
+    SetName("");
+    SetLastName("");
+    SetUsername("");
+    setPassword("");
+    SetDNI("");
+    SetTelefono("");
   };
 
   const RegisterEmail = async (e) => {

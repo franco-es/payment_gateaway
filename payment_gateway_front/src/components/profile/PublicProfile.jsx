@@ -4,15 +4,14 @@ import React from "react";
 
 import { ProgressBar } from "react-bootstrap";
 
-
 const PublicProfile = () => {
   return (
-    <div>
-      <div className="container">
+    <div className="h-100vh mb-5">
+      <div className="container d-flex flex-column h-100 mt-5 ">
         <div className="main-body">
-        <div className="row gutters-sm">
+          <div className="row gutters-sm">
             <div className="col-md-4 mb-3">
-              <div className="card">
+              <div className="shadow card">
                 <div className="card-body">
                   <div className="d-flex flex-column align-items-center text-center">
                     <img
@@ -27,7 +26,7 @@ const PublicProfile = () => {
                   </div>
                 </div>
               </div>
-              <div className="card mt-3">
+              <div className="shadow card mt-3">
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -102,42 +101,24 @@ const PublicProfile = () => {
               </div>
             </div>
             <div className="col-md-8">
-              <div className="card mb-3">
+              <div className="shadow-sm card mb-3">
                 <div className="card-body">
                   <div className="row">
                     <div className="col-sm-3">
                       <h6 className="mb-0">Full Name</h6>
                     </div>
-                    <div className="col-sm-9 text-secondary">Kenneth Valdez</div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Email</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">fip@jukmuh.al</div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Phone</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">(239) 816-9029</div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Mobile</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">(320) 380-4539</div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Address</h6>
-                    </div>
                     <div className="col-sm-9 text-secondary">
-                      Bay Area, San Francisco, CA
+                      Kenneth Valdez
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-12">
+                      <input
+                        type="button"
+                        value="Donate"
+                        className="btn btn-block br-25 bg-btn"
+                      />
                     </div>
                   </div>
                 </div>
@@ -145,7 +126,7 @@ const PublicProfile = () => {
 
               <div className="row gutters-sm">
                 <div className="col-sm-12 mb-12">
-                  <div className="card h-100">
+                  <div className="shadow-lg card">
                     <div className="card-body">
                       <h6 className="d-flex align-items-center mb-3">
                         <i className="material-icons text-info mr-2">Logros</i>
@@ -158,7 +139,7 @@ const PublicProfile = () => {
                       <ProgressBar now={89} />
                       <small>Logro 4</small>
                       <div className="progress mb-3 h-5px">
-                      <ProgressBar now={55} />
+                        <ProgressBar now={55} />
                       </div>
                     </div>
                   </div>

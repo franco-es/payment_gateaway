@@ -5,7 +5,7 @@ export default function register(email, pass, name, telefono, lastName, DNI, cat
   return new Promise((resolve, reject) => {
     const userRegister = {
       name: name,
-      lastName, lastName,
+      lastName: lastName,
       email: email,
       password: pass,
       dni: DNI,

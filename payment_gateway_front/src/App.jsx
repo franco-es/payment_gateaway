@@ -1,49 +1,48 @@
 import React from "react";
 
-import NavBar from "./components/NavBar";
+import NavBar from "./components/utils/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Login from "./components/Login";
-import Profile from "./components/Profile";
-import PublicProfile from "./components/PublicProfile";
-import Registro from "./components/Registro";
+import Login from "./components/user/Login";
+import Profile from "./components/profile/Profile";
+import PublicProfile from "./components/profile/PublicProfile";
+import Registro from "./components/user/Registro";
+import Footer from "./components/utils/Footer";
+import Inicio from "./components/utils/Inicio";
 
 import "./styles.css";
 
 function App() {
-  const [authUser, setAuthUser] = React.useState(false);
+  const [authUser, setAuthUser] = React.useState(null);
 
   React.useEffect(() => {
     let auth = localStorage.getItem("token");
     auth ? setAuthUser(auth) : setAuthUser(null);
   }, []);
+
   return (
     <Router>
-      <div className="">
+      <div className="bg-container">
         <NavBar auth={authUser} />
         <Switch>
-          {authUser == null ? (
-            <>
-              <Route path="/auth">
-                <Login />
-              </Route>
-              <Route path="/register">
-                <Registro />
-              </Route>
-              <Route path="/profile" exact>
-                <Profile />
-              </Route>
-              <Route path="/public" exact>
-                <PublicProfile />
-              </Route>
-            </>
-          ) : (
-            <p>Bienvenido</p>
-          )}
-          <Route path="/public" exact>
+          <Route path="/" exact>
+            <Inicio />
+          </Route>
+          <Route path="/auth">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Registro />
+          </Route>
+          <Route path="/public/:id" exact>
             <PublicProfile />
           </Route>
+
+          <Route path="/profile" exact>
+            <Profile />
+          </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

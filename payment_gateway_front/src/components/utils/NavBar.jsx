@@ -32,7 +32,7 @@ const NavBar = (props) => {
       <Container>
         <Navbar.Brand>
           <Link to="/" className="navbar-brand ">
-            payment-gateway
+          Payment-Gateway
           </Link>
         </Navbar.Brand>
         <Nav className="justify-content-end">
@@ -61,7 +61,7 @@ const NavBar = (props) => {
       <Container>
         <Navbar.Brand>
           <Link to="/" className="navbar-brand ">
-            Sis Vet
+            Payment-Gateway
           </Link>
         </Navbar.Brand>
         <div className="">

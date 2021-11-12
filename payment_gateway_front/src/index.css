@@ -12,4 +12,21 @@ code {
     monospace;
 }
 
+.br-25{
+  border-radius: 25px;
+}
+.bg-btn{
+  background-color: rgba(171, 235, 255, 0.433) !important;
+}
 
+.bg-btn:hover{
+  background-color: rgba(0, 195, 255, 0.741) !important;
+}
+
+.bg-container{
+  background-color: rgba(192, 240, 255, 0.453) !important;
+}
+
+.h-100vh{
+  height: 100vh !important;
+}

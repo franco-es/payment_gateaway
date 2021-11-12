@@ -10,6 +10,10 @@ const Users = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
+    USER_COUNTER_DONATIONS: {
+      type: DataTypes.INTEGER,
+      default: 0,
+    },
     USER_NAME: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -21,7 +25,7 @@ const Users = sequelize.define(
     USER_EMAIL: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     USER_PASSWORD: {
       type: DataTypes.STRING,
@@ -30,7 +34,7 @@ const Users = sequelize.define(
     USER_USERNAME: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     USER_PHONE: {
       type: DataTypes.STRING,
@@ -41,13 +45,18 @@ const Users = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    USER_DELETED: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      default: false,
+    },
     USER_CREATED_AT: {
       type: DataTypes.DATEONLY,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
     },
     USER_UPDATED_AT: {
       type: DataTypes.DATEONLY,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
     },
   },
   {

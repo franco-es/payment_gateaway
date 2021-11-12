@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 import { withRouter } from "react-router-dom";
 // FUNCIONES PROPIAS
 import Registro from "./Registro"; // COMPONENT DE Registro
-import login from "../services/login"; //function de logeo
+import login from "../../services/login"; //function de logeo
 
 const Login = (props) => {
 
@@ -54,7 +54,9 @@ const Login = (props) => {
 
 
   return (
-    <div className="mt-5 container">
+    <div className="h-100vh">
+
+    <div className="shadow mt-5 py-5 container bg-white">
       <h3>{esRegistro ? "Registro de usuarios" : "Login de usuarios"}</h3>
       <hr />
       <div className="bg_transparent row justify-content-center">
@@ -92,6 +94,7 @@ const Login = (props) => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };
