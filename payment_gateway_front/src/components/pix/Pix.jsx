@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Pix = (props) => {
-  const [pix] = useState(props.Pix);
+  const [pix, setPix] = useState("");
+
+  useEffect(() => {
+    setPix(props.Pix)
+  }, [props])
 
   return (
     <div>

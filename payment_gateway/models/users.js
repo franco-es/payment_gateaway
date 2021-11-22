@@ -10,7 +10,7 @@ const Users = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
-    USER_COUNTER_DONATIONS: {
+    USER_COUNTER: {
       type: DataTypes.INTEGER,
       default: 0,
     },
@@ -47,8 +47,7 @@ const Users = sequelize.define(
     },
     USER_DELETED: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
-      default: false,
+      default: 'false',
     },
     USER_CREATED_AT: {
       type: DataTypes.DATEONLY,

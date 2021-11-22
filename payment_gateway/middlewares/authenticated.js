@@ -2,7 +2,7 @@
 
 var jwt = require("jwt-simple");
 var moment = require("moment");
-var secret = "coco_nuts_gateway_382910_ioepwq";
+var secret = process.env.SECRET_KEY;
 
 exports.authenticated = (req, res, next) => {
   const { authorization } = req.headers;

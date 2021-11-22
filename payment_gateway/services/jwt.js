@@ -13,5 +13,17 @@ exports.createToken = (user) => {
     iat: moment().unix(),
     exp: moment().add(30, "days").unix,
   };
-  return jwt.encode(payload, "coco_nuts_gateway_382910_ioepwq");
+  return jwt.encode(payload, process.env.SECRET_KEY);
 };
+
+exports.createPixToken = (pix) => {
+  return jwt.encode(pix, process.env.SECRET_KEY)
+}
+
+exports.decodePix = (pix) => {
+  if (pix != null || !+ "") {
+    return jwt.decode(pix, process.env.SECRET_KEY)
+  } else {
+    return null;
+  }
+}

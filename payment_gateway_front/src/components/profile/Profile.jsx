@@ -7,9 +7,12 @@ import ProfileEdit from "./ProfileEdit";
 import TableArchivments from "../archivments/TableArchivments";
 import NewArchivment from "../archivments/NewArchivment";
 
+import getPixConn from "../../services/pix"
+
 import { Form, Button, Row, Col } from "react-bootstrap";
 
 const Profile = () => {
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
@@ -23,15 +26,19 @@ const Profile = () => {
   const [chalengeDesc, setChalengeDesc] = useState("");
   const [chalengeCuantity, setChalengeCuantity] = useState("");
 
-  useEffect(() => {
+  useEffect(async () => {
     var user = getUser();
+    setId(user.ID_USERS);
     setName(user.USER_NAME);
     setLastName(user.USER_LASTNAME);
     setEmail(user.USER_EMAIL);
     setPhone(user.USER_PHONE);
     setUsername(user.USER_USERNAME);
 
-    // getPix(user.ID_USERS);
+    await getPixConn(user.ID_USERS).then((res) => {
+      let data = res.data.pix;
+      setPix(data.code)
+    })
   }, []);
 
   /**
@@ -66,13 +73,15 @@ const Profile = () => {
     //   getPix();
     // }
   };
-  /**
-   * get Pix account
-   * @param id
-   * @return void
-   */
-  // async function getPix(id) {
-  //   // setPix(await )
+  // /**
+  //  * get Pix account
+  //  * @param id
+  //  * @return void
+  //  */
+  // async function getPix(idPix) {
+  //   await getPixConn(idPix).then((res) => {
+  //     console.log(res.data);
+  //   })
   // }
 
   return (
@@ -107,11 +116,12 @@ const Profile = () => {
                 <div>
                   <Row className="row mt-2">
                     <Col md={6}>
-                      <span className="labels">{name}</span>
+                      <Form.Label>Nombre y Apellido</Form.Label>
                     </Col>
-                    <div md={6}>
+                    <Col md={6}>
+                      <span className="labels">{name} </span>
                       <span className="labels">{lastName}</span>
-                    </div>
+                    </Col>
                   </Row>
                   <Row>
                     <Col md={12}>
@@ -162,7 +172,7 @@ const Profile = () => {
                   {isNewPix === true ? "Cancelar" : "Agregar / Modificar PIX"}
                 </Button>
               </div>
-              {isNewPix === true ? <NewPix /> : <Pix Pix={1} />}
+              {isNewPix === true ? <NewPix Pix={pix} /> : <Pix Pix={pix} />}
             </div>
           </div>
         </div>
