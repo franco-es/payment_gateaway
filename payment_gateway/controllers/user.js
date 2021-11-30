@@ -135,34 +135,38 @@ const Controller = {
       var data = [];
       let query = await users.findAll({ where: { USER_DELETED: 0 } });
       query.forEach(async (user) => {
-        let userData = user.dataValues
+        let userData = user.dataValues;
         delete userData.USER_PASSWORD;
         delete userData.USER_DELETED;
         delete userData.USER_CREATED_AT;
         delete userData.USER_UPDATED_AT;
-        const pixDB = await pix.findOne({ where: { ID_USER: userData.ID_USERS } });
+        const pixDB = await pix.findOne({
+          where: { ID_USER: userData.ID_USERS },
+        });
         let pixJSON = pixDB.toJSON();
         let pixCodeDecoded = jwt.decodePix(pixJSON.PIX_CODE);
-        let walletUser = await wallet.findOne({ where: { USER_ID: userData.ID_USERS } });
+        let walletUser = await wallet.findOne({
+          where: { USER_ID: userData.ID_USERS },
+        });
         let walletJSON = walletUser.toJSON();
         delete walletJSON.ID_WALLET;
         delete walletJSON.WALLET_UUID;
         var userJSON = {
           user: userData,
           wallet: walletJSON,
-          pix: pixCodeDecoded
+          pix: pixCodeDecoded,
         };
         data.push(userJSON);
         console.log(data);
-      })
+      });
       console.log("data" + data);
 
-      res.status(200).send(data)
+      res.status(200).send(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res.status(400).send({
-        error: error
-      })
+        error: error,
+      });
     }
   },
   getUserComplete: async (req, res) => {
@@ -192,14 +196,13 @@ const Controller = {
           message: "user",
           user: userJSON,
           pix: pixCodeDecoded,
-          wallet: walletJSON
-
+          wallet: walletJSON,
         });
       }
     } catch (error) {
       res.status(400).send({
         message: "Cannot read properties of null, please provide an Id VALID",
-        error: error
+        error: error,
       });
     }
   },
@@ -209,12 +212,12 @@ const Controller = {
 
     try {
       const pixHashed = jwt.createPixToken(pixCode);
-      console.log(pixHashed)
+      console.log(pixHashed);
 
       const pixParams = {
         PIX_CODE: pixHashed,
-        ID_USER: sub
-      }
+        ID_USER: sub,
+      };
       let pixCreated = await pix.create(pixParams);
       res.status(200).send({
         message: "success",
@@ -222,8 +225,8 @@ const Controller = {
       });
     } catch (error) {
       res.status(404).send({
-        message: "please send valid pix code."
-      })
+        message: "please send valid pix code.",
+      });
     }
   },
   getPix: async (req, res) => {
@@ -235,14 +238,14 @@ const Controller = {
       let pixCodeDecoded = jwt.decodePix(pixJSON.PIX_CODE);
 
       const params = {
+        id_pix: pixJSON.ID_PIX,
         id: pixJSON.ID_USER,
         code: pixCodeDecoded,
-      }
+      };
       res.status(200).send({
         message: "success",
         pix: params,
       });
-
     } catch (error) {
       res.status(400).send({
         message: "Cannot read properties of null, please provide an Id VALID",
@@ -257,14 +260,14 @@ const Controller = {
       const pixHashed = jwt.createPixToken(pixCode);
       const pixUpdated = await pix.findOne({
         where: {
-          ID_USER: sub
-        }
+          ID_USER: sub,
+        },
       });
 
       if (!pixUpdated) {
         res.status(400).send({
-          message: "pix not found"
-        })
+          message: "pix not found",
+        });
       }
       pixUpdated.PIX_CODE = pixHashed;
       pixUpdated.save();
@@ -273,16 +276,13 @@ const Controller = {
         message: "success",
         pix: pixUpdated,
       });
-
     } catch (error) {
       res.status(400).send({
         message: "error",
-        error: error
-      })
+        error: error,
+      });
     }
-
-
-  }
+  },
 };
 
 module.exports = Controller;

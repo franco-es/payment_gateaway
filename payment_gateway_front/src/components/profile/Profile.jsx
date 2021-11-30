@@ -7,7 +7,7 @@ import ProfileEdit from "./ProfileEdit";
 import TableArchivments from "../archivments/TableArchivments";
 import NewArchivment from "../archivments/NewArchivment";
 
-import getPixConn from "../../services/pix"
+import getPixConn from "../../services/pix/getPix";
 
 import { Form, Button, Row, Col } from "react-bootstrap";
 
@@ -37,8 +37,9 @@ const Profile = () => {
 
     await getPixConn(user.ID_USERS).then((res) => {
       let data = res.data.pix;
-      setPix(data.code)
-    })
+      localStorage.setItem("id_pix", data.id_pix);
+      setPix(data.code);
+    });
   }, []);
 
   /**
@@ -54,35 +55,15 @@ const Profile = () => {
   const newPix = (e) => {
     e.preventDefault();
     setIsNewPix(!isNewPix);
-    // if (isNewPix === false) {
-    //   getPix();
-    // }
   };
-
   const EditArchivments = (e) => {
     e.preventDefault();
     setIsEditArchivments(!isEditArchivments);
-    // if (isNewPix === false) {
-    //   getPix();
-    // }
   };
   const EditProfile = (e) => {
     e.preventDefault();
     setIsEditProfile(!isEditProfile);
-    // if (isNewPix === false) {
-    //   getPix();
-    // }
   };
-  // /**
-  //  * get Pix account
-  //  * @param id
-  //  * @return void
-  //  */
-  // async function getPix(idPix) {
-  //   await getPixConn(idPix).then((res) => {
-  //     console.log(res.data);
-  //   })
-  // }
 
   return (
     <div className="h-100vh">
@@ -124,19 +105,34 @@ const Profile = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col md={12}>
+                    <Col md={6}>
+                      <Form.Label>Telefono</Form.Label>
+                    </Col>
+                    <Col md={6}>
                       <span className="labels">{phone}</span>
                     </Col>
-                    <Col className="col-md-12">
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <Form.Label>Email</Form.Label>
+                    </Col>
+                    <Col md={6}>
                       <span>{email}</span>
                     </Col>
-                    <Col className="col-md-12">
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <Form.Label>PostCode</Form.Label>
+                    </Col>
+                    <Col md={6}>
                       <span className="labels">Postcode</span>
                     </Col>
-                    <Col className="col-md-12">
-                      <span className="labels">
-                        <b>Pais</b>
-                      </span>
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <Form.Label>Pais</Form.Label>
+                    </Col>
+                    <Col md={6}>
                       <div aria-label="Default select example">
                         <span>Pais</span>
                       </div>
@@ -154,15 +150,17 @@ const Profile = () => {
               <br />
               <div className="col-md-12">
                 <div className="d-flex justify-content-between align-items-center experience pb-3">
-                  <Button onClick={EditArchivments}>
+                  <h3>Comming soon</h3>
+
+                  {/* <Button onClick={EditArchivments}>
                     {isEditArchivments === true ? "Cancelar" : "Agregar Meta"}
-                  </Button>
+                  </Button> */}
                 </div>
-                {isEditArchivments === true ? (
+                {/* {isEditArchivments === true ? (
                   <NewArchivment />
                 ) : (
                   <TableArchivments />
-                )}
+                )} */}
               </div>
             </div>
 

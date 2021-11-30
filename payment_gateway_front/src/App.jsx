@@ -9,6 +9,9 @@ import PublicProfile from "./components/profile/PublicProfile";
 import Registro from "./components/user/Registro";
 import Footer from "./components/utils/Footer";
 import Inicio from "./components/utils/Inicio";
+import AdminView from "./components/administration/AdminView";
+
+import getCategory from "./services/category/getCategory";
 
 import "./styles.css";
 
@@ -36,6 +39,9 @@ function App() {
           </Route>
           <Route path="/public/:id" exact>
             <PublicProfile />
+          </Route>
+          <Route path="/administration" exact>
+            <AdminView />
           </Route>
 
           <Route path="/profile" exact>

@@ -6,9 +6,11 @@ import { withRouter } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
+import getCategory from "../../services/category/getCategory";
 
 const NavBar = (props) => {
   const [auth, setAuth] = React.useState(props.authUser);
+  const [isAdmin, setIsAdmin] = React.useState("");
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -16,8 +18,18 @@ const NavBar = (props) => {
     } else {
       setAuth(null);
     }
+    getAdminProfile();
   });
 
+  const getAdminProfile = async () => {
+    await getCategory(localStorage.getItem("token")).then((res) => {
+      if (res.data.category === "ADMIN") {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
+    });
+  };
   const signOut = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
@@ -32,7 +44,7 @@ const NavBar = (props) => {
       <Container>
         <Navbar.Brand>
           <Link to="/" className="navbar-brand ">
-          Payment-Gateway
+            Payment-Gateway
           </Link>
         </Navbar.Brand>
         <Nav className="justify-content-end">
@@ -47,6 +59,13 @@ const NavBar = (props) => {
               Me
             </NavLink>
           </Nav.Item>
+          {isAdmin === true ? (
+            <Nav.Item className="">
+              <NavLink className="btn  mr-2" to="/administration" exact>
+                Admin
+              </NavLink>
+            </Nav.Item>
+          ) : null}
 
           <Nav.Item>
             <button className="btn" onClick={signOut}>
