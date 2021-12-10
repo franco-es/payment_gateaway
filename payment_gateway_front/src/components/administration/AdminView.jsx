@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import getCategory from "../../services/category/getCategory";
 
-import { ProgressBar } from "react-bootstrap";
-
 const AdminView = () => {
   const [isAdmin, setIsAdmin] = useState("");
 
