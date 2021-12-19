@@ -130,6 +130,40 @@ const Controller = {
       });
     }
   },
+  getUserByUsername: async (req, res) => {
+    const { username } = req.query;
+    console.log(username);
+    try {
+      if (username === null || "") {
+        return res.status(400).send({
+          message: "not username provided",
+        });
+      } else {
+        let user = await users.findOne({ where: { USER_USERNAME: username } });
+        let userJSON = user.toJSON();
+        delete userJSON.USER_PASSWORD;
+        // delete userJSON.USER_NAME;
+        // delete userJSON.USER_LASTNAME;
+        delete userJSON.USER_EMAIL;
+        delete userJSON.USER_PHONE;
+        delete userJSON.USER_DNI;
+        delete userJSON.USER_DELETED;
+        delete userJSON.USER_CREATED_AT;
+        delete userJSON.USER_UPDATED_AT;
+
+        res.status(200).send({
+          message: "user",
+          user: userJSON,
+        });
+      }
+    } catch (error) {
+      res.status(400).send({
+        message:
+          "Cannot read properties of null, please provide an username VALID",
+        error: error,
+      });
+    }
+  },
   getAllUsers: async (req, res) => {
     try {
       var data = [];

@@ -1,10 +1,35 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/style-prop-object */
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { useParams } from "react-router-dom";
+
+import getUserByUsername from "../../services/getUser";
 
 import { ProgressBar } from "react-bootstrap";
 
 const PublicProfile = () => {
+  let { username } = useParams();
+
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
+    fetchData(username);
+  }, []);
+
+  const fetchData = async () => {
+    await getUserByUsername(username)
+      .then((res) => {
+        let response = res.data.user;
+        setName(response.USER_NAME);
+        setLastName(response.USER_LASTNAME);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="h-100vh mb-5">
       <div className="container d-flex flex-column h-100 mt-5 ">
@@ -21,7 +46,7 @@ const PublicProfile = () => {
                       width="150"
                     />
                     <div className="mt-3">
-                      <h4>User Name</h4>
+                      <h4>{username}</h4>
                     </div>
                   </div>
                 </div>
@@ -108,7 +133,7 @@ const PublicProfile = () => {
                       <h6 className="mb-0">Full Name</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                      Kenneth Valdez
+                      {name} {lastName}
                     </div>
                   </div>
                   <hr />

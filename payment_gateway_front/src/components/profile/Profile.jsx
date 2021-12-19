@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect, useCallback } from "react";
 
@@ -12,7 +13,7 @@ import getPixConn from "../../services/pix/getPix";
 import { Form, Button, Row, Col } from "react-bootstrap";
 
 const Profile = () => {
-  const [id, setId] = useState("");
+  const [setId] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
@@ -22,9 +23,9 @@ const Profile = () => {
   const [isNewPix, setIsNewPix] = useState(false);
   const [isEditArchivments, setIsEditArchivments] = useState(false);
   const [isEditProfile, setIsEditProfile] = useState(false);
-  const [challeng, setChalleng] = useState("");
-  const [chalengeDesc, setChalengeDesc] = useState("");
-  const [chalengeCuantity, setChalengeCuantity] = useState("");
+  // const [challeng, setChalleng] = useState("");
+  // const [chalengeDesc, setChalengeDesc] = useState("");
+  // const [chalengeCuantity, setChalengeCuantity] = useState("");
 
   useEffect(async () => {
     var user = getUser();
@@ -60,6 +61,7 @@ const Profile = () => {
     e.preventDefault();
     setIsEditArchivments(!isEditArchivments);
   };
+
   const EditProfile = (e) => {
     e.preventDefault();
     setIsEditProfile(!isEditProfile);

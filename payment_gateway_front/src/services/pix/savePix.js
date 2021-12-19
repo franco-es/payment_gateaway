@@ -1,12 +1,13 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3000/";
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export default function setPixConn(pix, token, method) {
   return new Promise((res, rej) => {
     const pixCode = {
       pixCode: pix,
     };
-    if (method == "post") {
+    if (method === "post") {
+      console.log("accion post");
       axios
         .post(`${baseUrl}users/savePix`, pixCode, {
           headers: {
@@ -20,6 +21,7 @@ export default function setPixConn(pix, token, method) {
           rej(err);
         });
     } else {
+      console.log("accion put");
       axios
         .put(`${baseUrl}users/updatePix`, pixCode, {
           headers: {

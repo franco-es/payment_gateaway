@@ -37,7 +37,7 @@ function App() {
           <Route path="/register">
             <Registro />
           </Route>
-          <Route path="/public/:id" exact>
+          <Route path="/public/:username" exact>
             <PublicProfile />
           </Route>
           <Route path="/administration" exact>

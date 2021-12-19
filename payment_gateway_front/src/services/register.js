@@ -1,7 +1,16 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3000/";
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
-export default function register(email, pass, name, telefono, lastName, DNI, category, username) {
+export default function register(
+  email,
+  pass,
+  name,
+  telefono,
+  lastName,
+  DNI,
+  category,
+  username
+) {
   return new Promise((resolve, reject) => {
     const userRegister = {
       name: name,
@@ -11,7 +20,7 @@ export default function register(email, pass, name, telefono, lastName, DNI, cat
       dni: DNI,
       phone: telefono,
       category: category,
-      username: username
+      username: username,
     };
     axios
       .post(`${baseUrl}users/new`, userRegister)
