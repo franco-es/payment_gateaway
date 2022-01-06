@@ -24,6 +24,7 @@ const wallet = sequelize.define(
     },
     WALLET_UUID: {
       type: DataTypes.UUID,
+      allowNull: true,
       defaultValue: Sequelize.UUIDV4,
     },
   },

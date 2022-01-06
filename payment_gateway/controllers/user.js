@@ -34,8 +34,9 @@ const Controller = {
     };
     try {
       const userCreated = await users.create(params);
+      console.log("user Created");
       const user = userCreated.toJSON();
-      // console.log(user.ID_USERS);
+      console.log(user);
       const walletParams = {
         USER_ID: user.ID_USERS,
       };
@@ -53,13 +54,13 @@ const Controller = {
         categoria: categoryCreated.toJSON(),
       });
     } catch (error) {
-      switch (error.errors[0].message) {
-        case "users.USER_EMAIL must be unique":
-          res.send("el email debe ser unico");
-        case "users.USER_USERNAME must be unique":
-          res.send("el username debe ser unico");
-      }
-      res.send(error.errors[0]);
+      // switch (error.errors[0].message) {
+      //   case "users.USER_EMAIL must be unique":
+      //     res.send("el email debe ser unico");
+      //   case "users.USER_USERNAME must be unique":
+      //     res.send("el username debe ser unico");
+      // }
+      res.send(error);
     }
   },
 

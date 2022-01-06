@@ -13,7 +13,7 @@ import getPixConn from "../../services/pix/getPix";
 import { Form, Button, Row, Col } from "react-bootstrap";
 
 const Profile = () => {
-  const [setId] = useState("");
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");

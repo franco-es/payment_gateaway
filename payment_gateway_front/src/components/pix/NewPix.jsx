@@ -15,7 +15,7 @@ const NewPix = (props) => {
 
   const savePix = async (e) => {
     e.preventDefault();
-    if (idPix === undefined || null) {
+    if (idPix === null) {
       await setPixConn(pix, token, "post")
         .then((res) => {
           console.log(res);

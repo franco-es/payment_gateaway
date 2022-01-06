@@ -9,6 +9,7 @@ const sequelize = new Sequelize(
     dialect: "mysql",
     port: process.env.DB_PORT,
     logging: true,
+    // schema: "paymentgateway",
   }
 );
 // sequelize.sync({ alter: true });
