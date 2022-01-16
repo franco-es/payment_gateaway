@@ -1,6 +1,8 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const user_categorie = require("./user_categorie");
 const sequelize = require("../services/connectSQL");
+const Users = require("./users");
+
 const Pix = sequelize.define(
   "pix",
   {
@@ -34,5 +36,8 @@ const Pix = sequelize.define(
   }
 );
 
+// Pix.belongsTo(Users, {
+//   foreignKey: "ID_USER",
+// });
 
 module.exports = Pix;

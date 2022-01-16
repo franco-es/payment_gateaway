@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import logo from "../../statics/Logo.png";
 
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -11,6 +12,7 @@ import getCategory from "../../services/category/getCategory";
 const NavBar = (props) => {
   const [auth, setAuth] = React.useState(props.authUser);
   const [isAdmin, setIsAdmin] = React.useState("");
+  const [img, setImg] = React.useState("../");
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -42,9 +44,9 @@ const NavBar = (props) => {
   return auth !== null ? (
     <Navbar bg="light" variant="light">
       <Container>
-        <Navbar.Brand>
-          <Link to="/" className="navbar-brand ">
-            Payment-Gateway
+        <Navbar.Brand className="img-fluid">
+          <Link to="/" className="navbar-brand img-fluid ">
+            <img src={logo} alt="Payment-GateWay" />
           </Link>
         </Navbar.Brand>
         <Nav className="justify-content-end">
@@ -78,9 +80,9 @@ const NavBar = (props) => {
   ) : (
     <Navbar bg="light" variant="light">
       <Container>
-        <Navbar.Brand>
-          <Link to="/" className="navbar-brand ">
-            Payment-Gateway
+        <Navbar.Brand className="img-fluid">
+          <Link to="/" className="navbar-brand img-fluid ">
+            <img src={logo} alt="Payment-GateWay" />
           </Link>
         </Navbar.Brand>
         <div className="">

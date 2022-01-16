@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const user_categorie = require("./user_categorie");
 const sequelize = require("../services/connectSQL");
+const Pix = require("./pix");
 const Users = sequelize.define(
   "users",
   {
@@ -47,7 +48,7 @@ const Users = sequelize.define(
     },
     USER_DELETED: {
       type: DataTypes.BOOLEAN,
-      default: 'false',
+      default: "false",
     },
     USER_CREATED_AT: {
       type: DataTypes.DATEONLY,
@@ -72,5 +73,9 @@ const Users = sequelize.define(
     ],
   }
 );
+
+Users.hasOne(Pix, {
+  foreignKey: "ID_USER",
+});
 
 module.exports = Users;

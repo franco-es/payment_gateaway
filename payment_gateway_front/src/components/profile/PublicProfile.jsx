@@ -7,12 +7,15 @@ import { useParams } from "react-router-dom";
 import getUserByUsername from "../../services/getUser";
 
 import { ProgressBar } from "react-bootstrap";
+import DonateForm from "../administration/DonateForm";
 
 const PublicProfile = () => {
   let { username } = useParams();
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [donateForm, setDonateForm] = useState(false);
+  const [id, setId] = useState("");
 
   useEffect(() => {
     fetchData(username);
@@ -24,10 +27,15 @@ const PublicProfile = () => {
         let response = res.data.user;
         setName(response.USER_NAME);
         setLastName(response.USER_LASTNAME);
+        setId(response.ID_USERS);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const showDonateForm = () => {
+    setDonateForm(true);
   };
 
   return (
@@ -51,7 +59,7 @@ const PublicProfile = () => {
                   </div>
                 </div>
               </div>
-              <div className="shadow card mt-3">
+              {/* <div className="shadow card mt-3">
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -122,8 +130,9 @@ const PublicProfile = () => {
                     </h6>
                     <span className="text-secondary">bootdey</span>
                   </li>
-                </ul>
-              </div>
+                </ul> *
+                <h4>SocialMedias</h4>
+              </div> */}
             </div>
             <div className="col-md-8">
               <div className="shadow-sm card mb-3">
@@ -137,14 +146,19 @@ const PublicProfile = () => {
                     </div>
                   </div>
                   <hr />
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <input
-                        type="button"
-                        value="Donate"
-                        className="btn btn-block br-25 bg-btn"
-                      />
-                    </div>
+                  <div className="row align-items-center">
+                    {donateForm === false ? (
+                      <div className="col-sm-12">
+                        <input
+                          type="button"
+                          value="Donate"
+                          className="btn btn-block br-25 bg-btn"
+                          onClick={showDonateForm}
+                        />
+                      </div>
+                    ) : (
+                      <DonateForm idUser={id} />
+                    )}
                   </div>
                 </div>
               </div>

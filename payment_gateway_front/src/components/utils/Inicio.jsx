@@ -14,20 +14,22 @@ const Inicio = () => {
   };
 
   return (
-    <div className="container">
-      <Form onSubmit={searchProfile}>
-        <Form.Group>
-          <Form.Label>Search an User</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="User"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit" className="mt-4">
-          Search
-        </Button>
-      </Form>
+    <div className="h-100vh">
+      <div className="container mt-5">
+        <Form onSubmit={searchProfile}>
+          <Form.Group>
+            <Form.Label>Search an User</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="User"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" className="mt-4">
+            Search
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };

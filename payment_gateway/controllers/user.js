@@ -167,36 +167,21 @@ const Controller = {
   },
   getAllUsers: async (req, res) => {
     try {
-      var data = [];
-      let query = await users.findAll({ where: { USER_DELETED: 0 } });
+      let query = await users.findAll(
+        { where: { USER_DELETED: 0 } },
+        {
+          include: pix,
+        }
+      );
       query.forEach(async (user) => {
         let userData = user.dataValues;
         delete userData.USER_PASSWORD;
         delete userData.USER_DELETED;
         delete userData.USER_CREATED_AT;
         delete userData.USER_UPDATED_AT;
-        const pixDB = await pix.findOne({
-          where: { ID_USER: userData.ID_USERS },
-        });
-        let pixJSON = pixDB.toJSON();
-        let pixCodeDecoded = jwt.decodePix(pixJSON.PIX_CODE);
-        let walletUser = await wallet.findOne({
-          where: { USER_ID: userData.ID_USERS },
-        });
-        let walletJSON = walletUser.toJSON();
-        delete walletJSON.ID_WALLET;
-        delete walletJSON.WALLET_UUID;
-        var userJSON = {
-          user: userData,
-          wallet: walletJSON,
-          pix: pixCodeDecoded,
-        };
-        data.push(userJSON);
-        console.log(data);
       });
-      console.log("data" + data);
 
-      res.status(200).send(data);
+      res.status(200).send({ query: query });
     } catch (error) {
       console.log(error);
       res.status(400).send({

@@ -5,6 +5,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Pix from "../pix/Pix";
 import NewPix from "../pix/NewPix";
 import ProfileEdit from "./ProfileEdit";
+import RetireFounds from "./RetireFounds";
 import TableArchivments from "../archivments/TableArchivments";
 import NewArchivment from "../archivments/NewArchivment";
 
@@ -21,6 +22,7 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [pix, setPix] = useState("");
   const [isNewPix, setIsNewPix] = useState(false);
+  const [isRetirment, setIsRetirment] = useState(false);
   const [isEditArchivments, setIsEditArchivments] = useState(false);
   const [isEditProfile, setIsEditProfile] = useState(false);
   // const [challeng, setChalleng] = useState("");
@@ -65,6 +67,11 @@ const Profile = () => {
   const EditProfile = (e) => {
     e.preventDefault();
     setIsEditProfile(!isEditProfile);
+  };
+
+  const retireFounds = (e) => {
+    e.preventDefault();
+    setIsRetirment(!isRetirment);
   };
 
   return (
@@ -166,13 +173,21 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="col-md-12 border-top pt-5">
+            <div className="col-md-12 border-top pt-5 mb-4">
               <div className="d-flex justify-content-between align-items-center experience pb-3">
                 <Button onClick={newPix}>
                   {isNewPix === true ? "Cancelar" : "Agregar / Modificar PIX"}
                 </Button>
               </div>
               {isNewPix === true ? <NewPix Pix={pix} /> : <Pix Pix={pix} />}
+            </div>
+            <div className="col-md-12 border-top pt-5">
+              <div className="d-flex justify-content-between align-items-center experience pb-3">
+                <Button onClick={retireFounds}>
+                  {isRetirment === true ? "Cancelar" : "Retirar Fondos"}
+                </Button>
+              </div>
+              {isRetirment === true ? <RetireFounds /> : null}
             </div>
           </div>
         </div>
