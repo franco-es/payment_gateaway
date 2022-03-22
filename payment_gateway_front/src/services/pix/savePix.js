@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = "ec2-3-239-238-73.compute-1.amazonaws.com:3000/";
 
 export default function setPixConn(pix, token, method) {
   return new Promise((res, rej) => {
@@ -9,7 +9,7 @@ export default function setPixConn(pix, token, method) {
     if (method === "post") {
       console.log("accion post");
       axios
-        .post(`${baseUrl}users/savePix`, pixCode, {
+        .post(`http://${baseUrl}users/savePix`, pixCode, {
           headers: {
             authorization: token,
           },

@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = "ec2-3-239-238-73.compute-1.amazonaws.com:3000/";
 
 export default function login(email, password) {
   return new Promise((resolve, reject) => {
@@ -8,7 +8,7 @@ export default function login(email, password) {
       password: password,
     };
     axios
-      .post(`${baseUrl}users/login`, user)
+      .post(`http://${baseUrl}users/login`, user)
       .then((res) => {
         resolve(res);
       })

@@ -1,10 +1,10 @@
 import axios from "axios";
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = "ec2-3-239-238-73.compute-1.amazonaws.com:3000/";
 
 export default function getCategory(token) {
   return new Promise((res, rej) => {
     axios
-      .get(`${baseUrl}category/getCategory`, {
+      .get(`http://${baseUrl}category/getCategory`, {
         headers: {
           authorization: token,
         },

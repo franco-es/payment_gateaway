@@ -11,10 +11,6 @@ const Users = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
-    USER_COUNTER: {
-      type: DataTypes.INTEGER,
-      default: 0,
-    },
     USER_NAME: {
       type: DataTypes.STRING,
       allowNull: false,

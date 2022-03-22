@@ -6,8 +6,6 @@ import Pix from "../pix/Pix";
 import NewPix from "../pix/NewPix";
 import ProfileEdit from "./ProfileEdit";
 import RetireFounds from "./RetireFounds";
-import TableArchivments from "../archivments/TableArchivments";
-import NewArchivment from "../archivments/NewArchivment";
 
 import getPixConn from "../../services/pix/getPix";
 

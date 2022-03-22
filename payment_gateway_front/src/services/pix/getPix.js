@@ -1,10 +1,10 @@
 import axios from "axios";
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = "ec2-3-239-238-73.compute-1.amazonaws.com:3000/";
 
 export default function getPixConn(id) {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${baseUrl}users/getPix?id=${id}`)
+      .get(`http://${baseUrl}users/getPix?id=${id}`)
       .then((res) => {
         resolve(res);
       })

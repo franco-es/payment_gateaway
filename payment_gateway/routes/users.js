@@ -13,5 +13,6 @@ router.get("/single", UserController.getUser);
 router.get("/singleByUsername", UserController.getUserByUsername);
 router.get("/all", UserController.getAllUsers);
 router.get("/singleComplete", UserController.getUserComplete);
+router.get("/hi", UserController.hi);
 
 module.exports = router;

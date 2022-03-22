@@ -54,12 +54,6 @@ const Controller = {
         categoria: categoryCreated.toJSON(),
       });
     } catch (error) {
-      // switch (error.errors[0].message) {
-      //   case "users.USER_EMAIL must be unique":
-      //     res.send("el email debe ser unico");
-      //   case "users.USER_USERNAME must be unique":
-      //     res.send("el username debe ser unico");
-      // }
       res.send(error);
     }
   },
@@ -302,6 +296,9 @@ const Controller = {
         error: error,
       });
     }
+  },
+  hi: async (req, res) => {
+    res.status(200).send("hola");
   },
 };
 
